@@ -12,4 +12,9 @@ class Applicant extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
 }

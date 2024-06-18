@@ -25,6 +25,7 @@ class StatusResource extends Resource
     protected static ?string $navigationGroup = 'Data Master';
     protected static ?string $navigationLabel = 'Proceed';
     protected static ?string $modelLabel = 'Proceed List';
+    protected static ?int $navigationSort= -1;
 
     public static function form(Form $form): Form
     {
