@@ -40,90 +40,159 @@ class Home extends Component implements HasForms
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            Section::make('Data Identitas')            
-            ->schema([                
-                Forms\Components\TextInput::make('appplicant_name')
-                    ->label('Nama Lengkap')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('gender')
-                    ->label('Jenis Kelamin')
-                    ->options([
-                        'Laki-laki' => 'Laki-laki',
-                        'Perempuan' => 'Perempuan'
-                    ])
-                    ->required(),
-                Forms\Components\TextInput::make('birth_of')
-                    ->label('Tempat Lahir')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('birth_of_date')
-                    ->label('Tanggal Lahir')
-                    ->required(),
-                Forms\Components\TextInput::make('address')
-                    ->label('Alamat')
-                    ->required()
-                    ->maxLength(255),                    
-                Forms\Components\TextInput::make('phone_number')    
-                    ->label('No. Handphone')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('identity_number')
-                    ->label('NIK')
-                    ->required()
-                    ->maxLength(16)                     
-                    ->unique(table: Applicant::class),
-                    ])->columns(4),
+            ->schema([       
+                Forms\Components\Section::make('Perosnal Data')         
+                ->description('Put the user details in.')
+                ->schema([                        
+                        TextInput::make('appplicant_name')
+                        ->label('Nama Pelamar')
+                        ->required()
+                        ->maxLength(255),
+                        TextInput::make('identity_number')
+                            ->label('NIK')
+                            ->required()
+                            ->maxLength(16)
+                            ->unique(),
+                        TextInput::make('npwp')
+                            ->label('NPWP')
+                            ->required()
+                            ->maxLength(5),
+                        TextInput::make('bpjs_kesehatan')
+                            ->label('No. BPJS Kesehatan')
+                            ->required()
+                            ->maxLength(12),
+                        TextInput::make('birth_of')
+                            ->label('tempat_lahir')
+                            ->required()
+                            ->maxLength(255),
+                        DatePicker::make('birth_of_date')
+                            ->label('Tanggal Lahir')
+                            ->required(),
+                        TextInput::make('address')
+                            ->label('Alamat')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('domisili')
+                            ->placeholder('Diisi jika tidak sesuai dengan alamat KTP')
+                            ->label('Alamat Domisili')                            
+                            ->maxLength(255),
+                        TextInput::make('phone_number')                            
+                            ->label('No. HP')
+                            ->required()
+                            ->numeric()
+                            ->maxLength(15),
+                        TextInput::make('wa_number')                            
+                            ->label('No. WhatsApp')
+                            ->required()
+                            ->numeric()
+                            ->maxLength(15),
+                        TextInput::make('email')
+                            ->label('Email')                            
+                            ->email()
+                            ->required(),
+                        TextInput::make('emergency_number')
+                            ->label('Telp. Darurat')
+                            ->numeric()
+                            ->required(),
+                        TextInput::make('emergency_number_name')
+                            ->label('Nama Telp. Darurat')                            
+                            ->required(),
+                        Select::make('maried_status')
+                            ->options([
+                                'Belum Menikah' => 'Belum Menikah',
+                                'Menikah' => 'Menikah',
+                            ])
+                            ->label('Status Pernikahan')
+                            ->required(),
+                        Select::make('gender')
+                            ->options([
+                                'Laki-laki' => 'Laki-laki',
+                                'Perempuan' => 'Perempuan'
+                            ])
+                            ->required(),
+                        TextInput::make('religion')
+                            ->label('Agama')
+                            ->required(),
+                        TextInput::make('height')
+                            ->required()
+                            ->maxLength(3),
+                        TextInput::make('weight')
+                            ->required()
+                            ->maxLength(2),
+                        TextInput::make('uniform_size')
+                            ->label('Ukuran Seragam')
+                            ->default('-'),
+                        TextInput::make('shoes_size')
+                            ->label('Ukuran Sepatu')
+                            ->default('-'),
+                        TextInput::make('mother')
+                            ->label('Nama Ibu')
+                            ->required(),
+                        TextInput::make('father')
+                            ->label('Nama Ayah')
+                            ->required(),
+                        TextInput::make('vaccine')
+                            ->label('Vaksin')
+                            ->required()
+                            ->maxLength(1),
+                        
+                        ])->columns(3),
+                                        
+                Section::make('Additional Data')
+                ->schema([
+                        Section::make('Educational Background')                            
+                            ->schema([
+                                TextInput::make('education_level')
+                                ->label('Nama Sekolah')
+                                ->required(),         
+                                TextInput::make('gradutaed')
+                                ->label('Tahun Lulus')
+                                ->required(),
+                                TextInput::make('major')
+                                ->label('Jurusan / Program Keahlian')
+                                ->required(),
+                                TextInput::make('math_value')
+                                ->label('Nilai Matematika')
+                                ->placeholder('Nilai Ijazah')
+                                ->numeric()
+                                ->required(),   
+                            ])
+                            ->columns(2),
 
-            Section::make('Data Pandukung')
-            ->schema([
-                Forms\Components\Select::make('education_level')
-                    ->options([
-                        'SMK' => 'SMK',
-                        'SMA' => 'SMA',
-                        'MA' => 'MA'
-                    ])
-                    ->label('Pendidikan Terakhir')
-                    ->required(),                    
-                Forms\Components\TextInput::make('height')
-                    ->label('Tinggi Badan')
-                    ->required()
-                    ->maxLength(3),
-                Forms\Components\TextInput::make('weight')
-                    ->label('Berat Badan')
-                    ->required()
-                    ->maxLength(2),                
-                Forms\Components\TextInput::make('npwp')
-                    ->label('No. NPWP')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('mother')
-                    ->label('Nama Ibu')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('emergency_contact')
-                    ->label('Kontak Darurat')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('vaccine')
-                    ->label('Vaksin')
-                    ->required()
-                    ->maxLength(1),
-                Forms\Components\TextInput::make('reference')
-                    ->label('Referensi')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('office')
-                    ->label('Kantor Tujuan')
-                    ->options([
-                        'Cikarang' => 'Cikarang',
-                        'Purwakarta' => 'Purwakarta'
-                    ])
-                    ->required()
-                    ->columnspan('full'),     
-            ])->columns(4)
-        ]);
+                            Section::make('Work Experience')
+                                ->description('')
+                                ->schema([
+                                    TextInput::make('company_name')
+                                    ->label('Nama Perusahaan')
+                                    ->required(),
+                                    TextInput::make('salary')
+                                    ->label('Upah / Gaji')
+                                    ->numeric()
+                                    ->default(0)
+                                    ->required(),  
+                                    TextInput::make('position')
+                                    ->label('Posisi / Bagian / Jabatan')                                    
+                                    ->required(),  
+                                    TextInput::make('duration')
+                                    ->label('Masa Kerja')
+                                    ->placeholder('Cth : 2 Bulan | 1 Tahun')                                    
+                                    ->required(),                                 
+                                ])
+                                ->columns(2),                                
+                        TextInput::make('skills')
+                        ->label('Skill / Keahlian'),                                                                                                   
+                        Select::make('office')
+                            ->label('Kantor Tujuan')
+                            ->options([
+                                'Cikarang' => 'Cikarang',
+                                'Purwakarta' => 'Purwakarta'
+                            ])
+                            ->required(),
+                        TextInput::make('reference')
+                        ->label('Referensi'),
+                ])->columns(3),                
+            ]);
+        
     }
     
 

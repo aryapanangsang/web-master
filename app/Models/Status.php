@@ -13,4 +13,9 @@ class Status extends Model
     [
         'status_name'
     ];
+
+    public function applicant()
+    {
+        return $this->hasOne(Applicant::class);
+    }
 }

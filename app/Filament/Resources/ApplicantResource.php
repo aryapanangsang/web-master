@@ -49,11 +49,10 @@ class ApplicantResource extends Resource
                         TextInput::make('npwp')
                             ->label('NPWP')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(5),
                         TextInput::make('bpjs_kesehatan')
                             ->label('No. BPJS Kesehatan')
                             ->required()
-                            ->label('BPJS Kesehatan')
                             ->maxLength(12),
                         TextInput::make('birth_of')
                             ->label('tempat_lahir')
@@ -81,8 +80,7 @@ class ApplicantResource extends Resource
                             ->numeric()
                             ->maxLength(15),
                         TextInput::make('email')
-                            ->label('Email')
-                            ->numeric()
+                            ->label('Email')                            
                             ->email()
                             ->required(),
                         TextInput::make('emergency_number')
@@ -90,8 +88,7 @@ class ApplicantResource extends Resource
                             ->numeric()
                             ->required(),
                         TextInput::make('emergency_number_name')
-                            ->label('Nama Telp. Darurat')
-                            ->numeric()
+                            ->label('Nama Telp. Darurat')                            
                             ->required(),
                         Select::make('maried_status')
                             ->options([
@@ -128,6 +125,7 @@ class ApplicantResource extends Resource
                             ->label('Nama Ayah')
                             ->required(),
                         TextInput::make('vaccine')
+                            ->label('Vaksin')
                             ->required()
                             ->maxLength(1),
                         
@@ -137,10 +135,10 @@ class ApplicantResource extends Resource
                 ->schema([
                         Section::make('Educational Background')                            
                             ->schema([
-                                TextInput::make('educational_level')
+                                TextInput::make('education_level')
                                 ->label('Nama Sekolah')
                                 ->required(),         
-                                TextInput::make('graduated')
+                                TextInput::make('gradutaed')
                                 ->label('Tahun Lulus')
                                 ->required(),
                                 TextInput::make('major')
@@ -160,9 +158,10 @@ class ApplicantResource extends Resource
                                     TextInput::make('company_name')
                                     ->label('Nama Perusahaan')
                                     ->required(),
-                                    TextInput::make('slary')
+                                    TextInput::make('salary')
                                     ->label('Upah / Gaji')
                                     ->numeric()
+                                    ->default(0)
                                     ->required(),  
                                     TextInput::make('position')
                                     ->label('Posisi / Bagian / Jabatan')                                    
@@ -173,7 +172,7 @@ class ApplicantResource extends Resource
                                     ->required(),                                 
                                 ])
                                 ->columns(2),                                
-                        TextInput::make('skill')
+                        TextInput::make('skills')
                         ->label('Skill / Keahlian'),                                                                                                   
                         Select::make('office')
                             ->label('Kantor Tujuan')
@@ -182,12 +181,14 @@ class ApplicantResource extends Resource
                                 'Purwakarta' => 'Purwakarta'
                             ])
                             ->required(),
+                        TextInput::make('reference')
+                        ->label('Referensi'),
                 ])->columns(3),
                 
 
                 Forms\Components\Section::make('Data Processed')
                 ->schema([
-                    Forms\Components\Select::make('company')                    
+                    Forms\Components\Select::make('company_id')                    
                         ->relationship('company', 'company_name'),
                     Forms\Components\TextInput::make('pre_test')                    
                         ->maxLength(255)
@@ -206,18 +207,8 @@ class ApplicantResource extends Resource
                         ->maxLength(255),
                     Forms\Components\DatePicker::make('join_date'),
                     Forms\Components\DatePicker::make('finished'),
-                    Forms\Components\Select::make('status')
-                            ->options([
-                                'Qualified' => 'Qualified',
-                                'Tes' => 'Tes',
-                                'Interview' => 'Interview',
-                                'MCU' => 'MCU',
-                                'Training' => 'Training',
-                                'Aktif' => 'Aktif',
-                                'Selesai' => 'Selesai',
-                                'Cut Off' => 'Cut Off',
-                                'Resign' => 'Resign'
-                            ]),
+                    Forms\Components\Select::make('status_id')
+                    ->relationship('status', 'status_name'),
                     Forms\Components\TextInput::make('information')
                         ->maxLength(255),
                 ])->columns(3),
@@ -267,7 +258,7 @@ class ApplicantResource extends Resource
                 Tables\Columns\TextColumn::make('reference')->label('Referensi')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('office')->label('Kantor Tujuan'),
-                Tables\Columns\TextColumn::make('company')->label('Perusahaan')
+                Tables\Columns\TextColumn::make('company.company_name')->label('Perusahaan')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pre_test')->label('Pre Test')

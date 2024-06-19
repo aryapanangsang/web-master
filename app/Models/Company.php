@@ -11,13 +11,13 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = 
-    [
+    [        
         'company_name',
         'company_address'
     ];
 
     public function Applicant()
     {
-        return $this->belonsTo(Applicant::class);
+        return $this->hasOne(Applicant::class);
     }
 }
