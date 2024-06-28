@@ -19,29 +19,52 @@ class Home extends Component implements HasForms
 {
 
     use InteractsWithForms;
-
+    // Primary Data
     public $appplicant_name ='';
-    public $gender ='';
+    public $identity_number ='';
+    public $npwp ='';    
+    public $bpjs_kesehatan ='';    
     public $birth_of ='';
     public $birth_of_date ='';
     public $address ='';
+    // Secondary Data
+    public $domisili ='';
     public $phone_number ='';
-    public $education_level ='';
+    public $wa_number ='';
+    public $email ='';
+    public $emergency_number ='';
+    public $emergency_number_name ='';
+    public $maried_status ='';
+    public $gender ='';
+    public $religion ='';
     public $height ='';
-    public $weight ='';
-    public $identity_number ='';
-    public $npwp ='';    
+    public $weight ='';    
+    public $uniform_size ='';    
+    public $shoes_size ='';    
+    // Additional Data
     public $mother ='';
-    public $emergency_contact ='';
+    public $father ='';
     public $vaccine ='';
-    public $reference ='';
+    // Education
+    public $education_level ='';
+    public $gradutaed ='';
+    public $major ='';
+    public $math_value ='';
+    // Experience
+    public $company_name ='';    
+    public $salary ='';    
+    public $position ='';    
+    public $duration ='';    
+    public $skills ='';
     public $office ='';
+    public $reference ='';    
+   
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([       
-                Forms\Components\Section::make('Perosnal Data')         
+                Forms\Components\Section::make('Personal Data')         
                 ->description('Put the user details in.')
                 ->schema([                        
                         TextInput::make('appplicant_name')
@@ -49,16 +72,17 @@ class Home extends Component implements HasForms
                         ->required()
                         ->maxLength(255),
                         TextInput::make('identity_number')
-                            ->label('NIK')
+                            ->label('NIK')                                                        
                             ->required()
                             ->maxLength(16)
-                            ->unique(),
+                            ->unique(table: Applicant::class),
                         TextInput::make('npwp')
                             ->label('NPWP')
                             ->required()
-                            ->maxLength(5),
+                            ->maxLength(16),
                         TextInput::make('bpjs_kesehatan')
-                            ->label('No. BPJS Kesehatan')
+                        // Masalahnya ada di penulisan variabel di atas. data form terbaru belum di update/dimasukan
+                            ->label('No. BPJS Kesehatan') 
                             ->required()
                             ->maxLength(12),
                         TextInput::make('birth_of')

@@ -1,5 +1,5 @@
 <div>
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -7,12 +7,12 @@
                 @endforeach
             </ul>
         </div>
-    @endif
-    {{-- @if (session()->has('message'))
+    @endif --}}
+    @if (session()->has('message'))
         <div class="text-2xl card outline-1 outline-green-600">
             {{ session('message') }}
         </div>
-    @endif --}}
+    @endif
     <form method="post" wire:submit="save">
         {{ $this->form }}
         <button type="submit"

@@ -279,7 +279,7 @@ class ApplicantResource extends Resource
                 Tables\Columns\TextColumn::make('join_date')->label('Masuk')
                     ->date(),            
                 Tables\Columns\TextColumn::make('finished')->label('Selesai')
-                    ->date(),                   
+                    ->date(),                                   
                 Tables\Columns\TextColumn::make('status')->label('Status')
                     ->searchable()
                     ->sortable(),

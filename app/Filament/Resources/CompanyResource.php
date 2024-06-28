@@ -28,7 +28,8 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 TextInput::make('company_name')
-                ->label('Company Name'),
+                ->label('Company Name')
+                ->unique(ignoreRecord : true),
                 TextInput::make('company_address')
                 ->label('Company Address'),
             ]);
@@ -50,6 +51,7 @@ class CompanyResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

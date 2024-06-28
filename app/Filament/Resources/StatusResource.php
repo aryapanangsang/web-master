@@ -133,17 +133,7 @@ class StatusResource extends Resource
                 Forms\Components\DatePicker::make('join_date'),
                 Forms\Components\DatePicker::make('finished'),
                 Forms\Components\Select::make('status')
-                        ->options([
-                            'Qualified' => 'Qualified',
-                            'Tes' => 'Tes',
-                            'Interview' => 'Interview',
-                            'MCU' => 'MCU',
-                            'Training' => 'Training',
-                            'Aktif' => 'Aktif',
-                            'Selesai' => 'Selesai',
-                            'Cut Off' => 'Cut Off',
-                            'Resign' => 'Resign'
-                        ]),
+                        ->relationship('status', 'status_name'),
                 Forms\Components\TextInput::make('information')
                     ->maxLength(255),
             ])->columns(3),
@@ -162,24 +152,21 @@ class StatusResource extends Resource
                     $tgl_daftar = Carbon::create($order->birth_of_date);
                     return $order->birth_of . ', ' . $tgl_daftar->isoFormat('D MMMM Y');
                 }),
-                TextColumn::make('company')->label('Perusahaan'),
-                TextColumn::make('status')->label('Status')
+                TextColumn::make('company.company_name')->label('Perusahaan'),
+                TextColumn::make('status.status_name')->label('Status')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('status')                                          
-                ->options([
-                    'Qualified' => 'Qualified',
-                    'Tes' => 'Tes',
-                    'Interview' => 'Interview',
-                    'MCU' => 'MCU',
-                    'Training' => 'Training',
-                    'Aktif' => 'Aktif',
-                    'Selesai' => 'Selesai',
-                    'Cut Off' => 'Cut Off',
-                    'Resign' => 'Resign',                    
-                ])->default('Qualified')
+                SelectFilter::make('status_id')
+                ->label('Status Progres')                                       
+                ->relationship('status', 'status_name')
+                ->default(1),
+
+                SelectFilter::make('company_id')
+                ->label('Perusahaan')                                       
+                ->relationship('company', 'company_name')
+                ->default(1),
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
