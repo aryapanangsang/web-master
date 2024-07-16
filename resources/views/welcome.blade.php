@@ -1,4 +1,4 @@
-@include('sweetalert::alert')
+{{-- @include('sweetalert::alert') --}}
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
@@ -29,7 +29,7 @@
             <h2 class="text-white font-semibold text-5xl mt-2 text-center">PRIMA BUANA INDONESIA</h2>
 
             <a href="#form">
-                <x-eva-arrow-ios-downward-outline class="w-12 h-12 mt-14 fill-white animate-bounce" />
+                <x-eva-arrow-downward-outline class="w-12 h-12 mt-14 fill-white animate-bounce" />
             </a>
 
         </div>
