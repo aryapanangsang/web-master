@@ -19,10 +19,7 @@ class ListApplicants extends ListRecords
         return [
             Actions\CreateAction::make(),     
             ExportAction::make('Export')->label('Export')
-                    ->exporter(ApplicantExporter::class)
-                    ->formats([
-                        ExportFormat::Xlsx,
-                    ])       
+                    ->exporter(ApplicantExporter::class)                    
         ];
     }
 }

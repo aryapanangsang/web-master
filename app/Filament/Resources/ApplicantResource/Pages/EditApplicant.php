@@ -19,9 +19,7 @@ class EditApplicant extends EditRecord
             Actions\DeleteAction::make(),
             ExportAction::make('Export')->label('Export')
                     ->exporter(ApplicantExporter::class)
-                    ->formats([
-                        ExportFormat::Xlsx,
-                    ])   
+                    
         ];
     }
 }

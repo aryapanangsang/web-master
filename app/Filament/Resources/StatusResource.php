@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use App\Models\Applicant;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -158,23 +159,25 @@ class StatusResource extends Resource
                     ->sortable(),
             ])
             ->filters([
+                // SelectFilter::make('company_id')
+                // ->label('Perusahaan')                                       
+                // ->relationship('company', 'company_name')
+                // ->default(1),
                 SelectFilter::make('status_id')
                 ->label('Status Progres')                                       
                 ->relationship('status', 'status_name')
-                ->default(1),
-
-                SelectFilter::make('company_id')
-                ->label('Perusahaan')                                       
-                ->relationship('company', 'company_name')
-                ->default(1),
+                ->default(1)    
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                    ->url(fn(Applicant $record)=>route('download.applicant',$record))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                    Tables\Actions\DeleteBulkAction::make(),                    
+                ])
             ]);
     }
 

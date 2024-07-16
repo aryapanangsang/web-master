@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('download', [PDFController::class, 'downloadpdf'])->name('download.tes');
+Route::get('download/{id}', [PDFController::class, 'applicantpdf'])->name('download.applicant');

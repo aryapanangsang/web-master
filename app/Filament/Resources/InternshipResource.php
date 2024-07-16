@@ -8,9 +8,11 @@ use Filament\Forms\Form;
 use App\Models\Applicant;
 use App\Models\Internship;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,7 +33,11 @@ class InternshipResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('appplicant_name')
+                ->label('Applicant Name')
+                ->disabled(),
+                TextInput::make('insurance_number')                    
+                    ->numeric()
             ]);
     }
 
@@ -39,20 +45,26 @@ class InternshipResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('applicant_name')
+                TextColumn::make('appplicant_name')
                 ->searchable(),
-                TextColumn::make('company.comany_name'),
+                TextColumn::make('join_date')
+                ->formatStateUsing(function ($state, Applicant $order) {
+                    $tgl_daftar = Carbon::create($order->birth_of_date);
+                    return $tgl_daftar->isoFormat('D MMMM Y');
+                }),
+                TextColumn::make('finished')
+                ->formatStateUsing(function ($state, Applicant $order) {
+                    $tgl_daftar = Carbon::create($order->birth_of_date);
+                    return $tgl_daftar->isoFormat('D MMMM Y');
+                }),
+                TextColumn::make('insurance_number')
+
             ])
             ->filters([
             SelectFilter::make('status_id')
                 ->label('Status Progres')                                       
                 ->relationship('status', 'status_name')
-                ->default(1),
-
-            SelectFilter::make('company_id')
-                ->label('Perusahaan')                                       
-                ->relationship('company', 'company_name')
-                ->default(1),               
+                ->default(7)                 
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

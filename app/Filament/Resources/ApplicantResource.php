@@ -49,7 +49,7 @@ class ApplicantResource extends Resource
                         TextInput::make('npwp')
                             ->label('NPWP')
                             ->required()
-                            ->maxLength(5),
+                            ->maxLength(16),
                         TextInput::make('bpjs_kesehatan')
                             ->label('No. BPJS Kesehatan')
                             ->required()
@@ -138,7 +138,7 @@ class ApplicantResource extends Resource
                                 TextInput::make('education_level')
                                 ->label('Nama Sekolah')
                                 ->required(),         
-                                TextInput::make('gradutaed')
+                                TextInput::make('graduated')
                                 ->label('Tahun Lulus')
                                 ->required(),
                                 TextInput::make('major')

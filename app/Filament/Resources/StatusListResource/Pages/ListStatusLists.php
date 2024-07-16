@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\StatusListResource\Pages;
 
-use App\Filament\Resources\StatusListResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\StatusListResource;
 
 class ListStatusLists extends ListRecords
 {
@@ -15,5 +15,5 @@ class ListStatusLists extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
-    }
+    }    
 }

@@ -47,7 +47,7 @@ class Home extends Component implements HasForms
     public $vaccine ='';
     // Education
     public $education_level ='';
-    public $gradutaed ='';
+    public $graduated ='';
     public $major ='';
     public $math_value ='';
     // Experience
@@ -169,7 +169,7 @@ class Home extends Component implements HasForms
                                 TextInput::make('education_level')
                                 ->label('Nama Sekolah')
                                 ->required(),         
-                                TextInput::make('gradutaed')
+                                TextInput::make('graduated')
                                 ->label('Tahun Lulus')
                                 ->required(),
                                 TextInput::make('major')
@@ -211,10 +211,8 @@ class Home extends Component implements HasForms
                                 'Cikarang' => 'Cikarang',
                                 'Purwakarta' => 'Purwakarta'
                             ])
-                            ->required(),
-                        TextInput::make('reference')
-                        ->label('Referensi'),
-                ])->columns(3),                
+                            ->required(),                        
+                ])->columns(2),                
             ]);
         
     }
