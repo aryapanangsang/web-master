@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Applicant;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 
@@ -16,6 +17,14 @@ use App\Http\Controllers\PDFController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('view', function(){
+    $applicants = Applicant::first();
+       return view('formulirPDF', [
+        'date' => date('m/d/Y'),
+       'applicants' => $applicants
+    ]);
 });
 
 Route::get('download', [PDFController::class, 'downloadpdf'])->name('download.tes');
