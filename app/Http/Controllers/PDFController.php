@@ -36,7 +36,7 @@ class PDFController extends Controller
             'applicants' => $applicants,
             'tgl_daftar' => $tgl_daftar
         ];
-        $pdf = PDF::loadView('formulirPDF', $data)->setPaper('a4', 'potret');    
+        $pdf = PDF::loadView('formulirPDF', $data)->setPaper('a4', 'potret');          
         $named = 'Formulir' . ' ' . $applicants->appplicant_name;
         $format = $named . '.pdf';
         return $pdf->stream($format);

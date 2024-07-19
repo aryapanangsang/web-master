@@ -48,133 +48,136 @@
 
         <form>
             <section>
+                <h4 class="personal">I. PERSONAL DATA</h4>
                 <table>
-                    <h4 class="personal">I. PERSONAL DATA</h4>
                     <tr>
-                        <td>Nama</td>
+                        <td class="label">Nama</td>
                         <td>: {{ $applicants->appplicant_name }}</td>
                     </tr>
                     <tr>
-                        <td>No. KTP</td>
+                        <td class="label">No. KTP</td>
                         <td>: {{ $applicants->identity_number }}</td>
                     </tr>
                     <tr>
-                        <td>No. NPWP</td>
+                        <td class="label">No. NPWP</td>
                         <td>: {{ $applicants->npwp }}</td>
                     </tr>
                     <tr>
-                        <td>No. BPJS Kesehatan</td>
+                        <td class="label">No. BPJS Kesehatan</td>
                         <td>: {{ $applicants->bpjs_kesehatan }}</td>
                     </tr>
                     <tr>
-                        <td>Tempat, Tanggal Lahir</td>
+                        <td class="label">Tempat, Tanggal Lahir</td>
                         <td>: {{ $applicants->birth_of . ',' . $birth_of_date }}</td>
                     </tr>
                     <tr>
-                        <td>Alamat</td>
+                        <td class="label">Alamat</td>
                         <td>: {{ $applicants->address }}</td>
                     </tr>
                     <tr>
-                        <td>Domisili</td>
+                        <td class="label">Domisili</td>
                         <td>: {{ $applicants->domisili }}</td>
                     </tr>
                     <tr>
-                        <td>No. Hp Aktif</td>
+                        <td class="label">No. Hp Aktif</td>
                         <td>: {{ $applicants->phone_number }}</td>
                     </tr>
                     <tr>
-                        <td>No. WhatsApp</td>
+                        <td class="label">No. WhatsApp</td>
                         <td>: {{ $applicants->wa_number }}</td>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td class="label">Email</td>
                         <td>: {{ $applicants->email }}</td>
                     </tr>
                     <tr>
-                        <td>Kontak Darurat</td>
+                        <td class="label">Kontak Darurat</td>
                         <td>: {{ $applicants->emergency_number }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Kontak Darurat</td>
+                        <td class="label">Nama Kontak Darurat</td>
                         <td>: {{ $applicants->emergency_number_name }}</td>
                     </tr>
                     <tr>
-                        <td>Status Pernikahan</td>
+                        <td class="label">Status Pernikahan</td>
                         <td>: {{ $applicants->maried_status }}</td>
                     </tr>
                     <tr>
-                        <td>Jenis Kelamin</td>
+                        <td class="label">Jenis Kelamin</td>
                         <td>: {{ $applicants->gender }}</td>
                     </tr>
                     <tr>
-                        <td>Agama</td>
+                        <td class="label">Agama</td>
                         <td>: {{ $applicants->religion }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Ibu</td>
+                        <td class="label">Nama Ibu</td>
                         <td>: {{ $applicants->mother }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Ayah</td>
+                        <td class="label">Nama Ayah</td>
                         <td>: {{ $applicants->father }}</td>
                     </tr>
                     <tr>
-                        <td>Status Vaksin</td>
+                        <td class="label">Status Vaksin</td>
                         <td>: {{ $applicants->caccine }}</td>
                     </tr>
                     <tr>
-                        <td>Tinggi Badan</td>
+                        <td class="label">Tinggi Badan</td>
                         <td>: {{ $applicants->height }}</td>
                     </tr>
                     <tr>
-                        <td>Berat Badan</td>
+                        <td class="label">Berat Badan</td>
                         <td>: {{ $applicants->weight }}</td>
                     </tr>
                     <tr>
-                        <td>Ukuran Seragam</td>
+                        <td class="label">Ukuran Seragam</td>
                         <td>: {{ $applicants->uniform_size }}</td>
                     </tr>
                     <tr>
-                        <td>Ukuran Sepatu</td>
+                        <td class="label">Ukuran Sepatu</td>
                         <td>: {{ $applicants->shoes_size }}</td>
                     </tr>
-
-                    <h4 class="pendidikan">II. PENDIDIKAN TERAKHIR</h4>
+                </table>
+                <h4 class="pendidikan">II. PENDIDIKAN TERAKHIR</h4>
+                <table>
                     <tr>
-                        <td>Nama Sekolah</td>
+                        <td class="label">Nama Sekolah</td>
                         <td>: {{ $applicants->educational_level }}</td>
                     </tr>
                     <tr>
-                        <td>Tahun Lulus</td>
+                        <td class="label">Tahun Lulus</td>
                         <td>: {{ $applicants->graduated }}</td>
                     </tr>
                     <tr>
-                        <td>Jurusan</td>
+                        <td class="label">Jurusan</td>
                         <td>: {{ $applicants->major }}</td>
                     </tr>
                     <tr>
-                        <td>Nilai Matematika</td>
+                        <td class="label">Nilai Matematika</td>
                         <td>: {{ $applicants->math_value }}</td>
                     </tr>
                     <tr>
-                        <td>Skill/Keahlian</td>
+                        <td class="label">Skill/Keahlian</td>
                         <td>: {{ $applicants->skills }}</td>
                     </tr>
-                    <h4 class="pengalaman">III. Pengalaman </h4>
+                </table>
+                <h4 class="pengalaman">III. Pengalaman </h4>
+                <table>
                     <tr>
-                        <td>Nama Perusahaan</td>
+                        <td class="label">Nama Perusahaan</td>
                         <td>: {{ $applicants->company_name }}</td>
                     </tr>
                     <tr>
-                        <td>Uang Saku / Upah</td>
+                        <td class="label">Uang Saku / Upah</td>
                         <td>: {{ $applicants->salary }}</td>
                     </tr>
                     <tr>
-                        <td>Jabatan / Bagian</td>
+                        <td class="label">Jabatan / Bagian</td>
                         <td>: {{ $applicants->position }}</td>
                     </tr>
                     <tr>
-                        <td>Masa Kerja</td>
+                        <td class="label">Masa Kerja</td>
                         <td>: {{ $applicants->duration }}</td>
                     </tr>
                 </table>
@@ -203,6 +206,7 @@
                 </div>
             </section>
         </form>
+
     </div>
 
     <script>
