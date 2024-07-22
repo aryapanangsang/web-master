@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\McuResource\Pages;
-use App\Filament\Resources\McuResource\RelationManagers;
+use Carbon\Carbon;
 use App\Models\Mcu;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\McuResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\McuResource\RelationManagers;
 
 class McuResource extends Resource
 {
@@ -27,7 +32,9 @@ class McuResource extends Resource
     {
         return $form
             ->schema([
-                //
+                DatePicker::make('tanggal_mcu')
+                ->required()
+                ->label('Tanggal MCU'),               
             ]);
     }
 
@@ -35,13 +42,26 @@ class McuResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')
+                ->label('No'),
+                TextColumn::make('tanggal_mcu')
+                ->label('Tanggal MCU')
+                ->formatStateUsing(function ($state, Mcu $order) {
+                    Carbon::setLocale('id');
+                    $tgl_mcu = Carbon::create($order->tanggal_mcu);
+                    return $tgl_mcu->isoFormat('D MMMM Y');
+                }),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download Pengantar')
+                    ->label('Download Pengantar')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn(Mcu $record)=>route('download.pengantar',$record))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

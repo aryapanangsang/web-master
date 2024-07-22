@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use App\Models\Mcu;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class PDFController extends Controller
@@ -41,5 +42,24 @@ class PDFController extends Controller
         $format = $named . '.pdf';
         return $pdf->stream($format);
         // return $pdf->download($format);
+    }
+
+    public function pengantarpdf($id)
+    {
+        Carbon::setLocale('id');
+
+         $mcuses = Mcu::find($id);         
+         $tgl_mcu = $mcuses->tanggal_mcu;        
+         $applicants = Applicant::whereDate('mcu_date',$tgl_mcu)->get();
+        //  return view('pengantarPDF', );
+        //  $tgl_lahir = Carbon::create($applicants->birth_of_date)->isoFormat('D MMMM Y');          
+        //  $tgl_mcu = Carbon::create($applicants->mcu_date)->isoFormat('D MMMM Y');          
+        //  $data = [                   
+        //     'applicants' => $applicants,            
+        // ];
+        $pdf = PDF::loadView('pengantarPDF', compact('applicants'))->setPaper('a4', 'potret');          
+        // $named = 'Formulir' . ' ' . $applicants->appplicant_name;
+        // $format = $named . '.pdf';
+        return $pdf->stream('pengantar');
     }
 }
