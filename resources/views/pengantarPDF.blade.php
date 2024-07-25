@@ -23,7 +23,6 @@
             width: 100%;
             height: 90%;
             margin: 0 auto;
-            border: 1px solid #000;
             padding: 10px 5px;
         }
 
@@ -35,7 +34,7 @@
         }
 
         .logo img {
-            width: 400px;
+            width: 600px;
             margin-bottom: -15px;
         }
 
@@ -73,7 +72,7 @@
                     <tr>
                         <td class="label">Perihal</td>
                         <td class="sparator">:</td>
-                        <td>Medikal Check Up LPK-PBI</td>
+                        <td>Medical Check Up LPK-PBI</td>
                     </tr>
                     <br>
                     <tr>
@@ -99,14 +98,14 @@
                 </span>
             </div>
 
-            <div class="table table-responsive conten" style="width: 80% ; margin: 10px auto">
-                <table class="table table-striped" style="border-width: 0px; border: 1px solid black">
+            <div class="table table-responsive content" style="width: 85% ; margin: 10px auto ;">
+                <table border="" cellspacing="0" cellpadding="0" style="border-color: black ;">
                     <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>NAMA</th>
-                            <th>L/P</th>
-                            <th>TEMPAT, TANGGAL LAHIR</th>
+                        <tr style="text-align: center; border: 2px solid black">
+                            <th style="padding: 5px 8px; border:2px solid black">NO</th>
+                            <th style="padding: 5px 55px ; border:2px solid black">NAMA</th>
+                            <th style="padding: 5px 35px ; border:2px solid black">L/P</th>
+                            <th style="padding: 5px 30px ; border:2px solid black">TEMPAT, TANGGAL LAHIR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,17 +113,57 @@
                             $no = 1;
                         @endphp
                         @foreach ($applicants as $applicant)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $applicant->appplicant_name }}</td>
-                                <td>{{ $applicant->gender }}</td>
-                                <td>{{ $applicant->birth_of . \Carbon\Carbon::create($applicant->birth_of_date)->isoFormat('D MMMM Y') }}
+                            <tr style="border: 2px solid black">
+                                <td style="text-align: center; border:2px solid black">{{ $no++ }}</td>
+                                <td style="padding: 5px ; border:2px solid black">{{ $applicant->appplicant_name }}</td>
+                                <td style="padding: 5px; text-align: center; border:2px solid black">
+                                    {{ $applicant->gender }}</td>
+                                <td style="padding: 5px ; border:2px solid black">
+                                    {{ $applicant->birth_of . ', ' . \Carbon\Carbon::create($applicant->birth_of_date)->isoFormat('D MMMM Y') }}
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <div class="penutup" style="margin-top: 10px">
+                <span>
+                    Demikian surat pengantar ini dibuat untuk dapat dipergunakan sebagaimana mestinya. Atas perhatian
+                    dan kerjasamanya kami ucapkan terimakasih.
+                </span>
+            </div>
+            <br>
+            <br>
+            <div class="ttd">
+                <span>
+                    Cikarang, {{ \Carbon\Carbon::create($applicant->mcu_date)->isoFormat('D MMMM Y') }}
+                </span>
+                <br>
+                <label for="">
+                    <strong>LPK PRIMA BUANA INDONESIA</strong>
+                    <hr style=" width: 150px ; margin-top: 125px; margin-left: 0 ">
+                </label>
+            </div>
+            <footer
+                style="margin-top: 150px;   
+                position: fixed;
+                bottom: -30px;
+                left: 0;
+                right: 0;
+                bottom: 0;          
+                text-align: center;
+                padding: 10px;">
+                <hr style="width: 100% ; margin-bottom: 10px;">
+                <span>Gedung Pusat Pelatihan :</span>
+                <br>
+                <span>
+                    Jl. Amir Hamzah No. 110 Kel. Sertajaya Kec. Cikarang Timur Kab. Bekasi
+                </span>
+                <br>
+                <span>
+                    Tlp. 021 2948 1024 Email : primabuanaindonesia@gmail.com
+                </span>
+            </footer>
         </div>
     </div>
 </body>

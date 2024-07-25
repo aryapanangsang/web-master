@@ -67,6 +67,7 @@ class InternshipResource extends Resource
                 ->default(7)                 
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),  
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

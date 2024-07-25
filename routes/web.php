@@ -30,3 +30,7 @@ Route::get('view', function(){
 Route::get('download', [PDFController::class, 'downloadpdf'])->name('download.tes');
 Route::get('download/{id}', [PDFController::class, 'applicantpdf'])->name('download.applicant');
 Route::get('pengantar/{id}', [PDFController::class, 'pengantarpdf'])->name('download.pengantar');
+
+Route::get('/external-redirect', function () {
+    return redirect()->away('https://lpkprimabuanaindonesia.com');
+})->name('website');

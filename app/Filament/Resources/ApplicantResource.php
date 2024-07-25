@@ -8,15 +8,17 @@ use Filament\Forms\Form;
 use App\Models\Applicant;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
-use Filament\Forms\Components\Section;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Exports\ApplicantExporter;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\ExportAction;   
 use Filament\Actions\Exports\Enums\ExportFormat;
 use App\Filament\Resources\ApplicantResource\Pages;
@@ -25,7 +27,7 @@ use App\Filament\Resources\ApplicantResource\RelationManagers;
 
 class ApplicantResource extends Resource
 {
-    protected static ?string $model = Applicant::class;
+    protected static ?string $model = Applicant::class;    
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';    
     
@@ -225,7 +227,7 @@ class ApplicantResource extends Resource
             //             ExportFormat::Xlsx,
             //         ])
             // ])
-            ->columns([                
+            ->columns([                                            
                 Tables\Columns\TextColumn::make('appplicant_name')->label('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')->label('Jenis Kelamin'),
@@ -235,98 +237,77 @@ class ApplicantResource extends Resource
                     return $order->birth_of . ', ' . $tgl_daftar->isoFormat('D MMMM Y');
                 })
                     ->searchable(),                
-                Tables\Columns\TextColumn::make('address')->label('Alamat')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone_number')->label('No. Hp')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('education_level')->label('Pendidikan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('height')->label('TB')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('weight')->label('BB')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('identity_number')->label('NIK')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('npwp')->label('NPWP')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('mother')->label('IBU')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('emergency_contact')->label('Kontak Darurat')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('vaccine')->label('Vaksin')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('reference')->label('Referensi')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('office')->label('Kantor Tujuan'),
-                Tables\Columns\TextColumn::make('company.company_name')->label('Perusahaan')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('pre_test')->label('Pre Test')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('test1')->label('Tes 1')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('test2')->label('Tes 2')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('post_test1')->label('Post Tes 1')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('post_test2')->label('Post Tes 2')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('mcu_date')->label('Tgl. MCU')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mcu_result')->label('Hasil MCU')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('join_date')->label('Masuk')
-                    ->date(),            
-                Tables\Columns\TextColumn::make('finished')->label('Selesai')
-                    ->date(),                                   
-                Tables\Columns\TextColumn::make('status')->label('Status')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('information')->label('Keterangan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()                    
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('address')->label('Alamat')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('phone_number')->label('No. Hp')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('education_level')->label('Pendidikan')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('height')->label('TB')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('weight')->label('BB')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('identity_number')->label('NIK')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('npwp')->label('NPWP')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('mother')->label('IBU')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('emergency_contact')->label('Kontak Darurat')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('vaccine')->label('Vaksin')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('reference')->label('Referensi')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('office')->label('Kantor Tujuan'),
+                // Tables\Columns\TextColumn::make('company.company_name')->label('Perusahaan')
+                //     ->searchable()
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('pre_test')->label('Pre Test')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('test1')->label('Tes 1')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('test2')->label('Tes 2')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('post_test1')->label('Post Tes 1')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('post_test2')->label('Post Tes 2')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('mcu_date')->label('Tgl. MCU')
+                //     ->date()
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('mcu_result')->label('Hasil MCU')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('join_date')->label('Masuk')
+                //     ->date(),            
+                // Tables\Columns\TextColumn::make('finished')->label('Selesai')
+                //     ->date(),                                   
+                // Tables\Columns\TextColumn::make('status')->label('Status')
+                //     ->searchable()
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make('information')->label('Keterangan')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime()                    
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('company')
-                ->options([
-                    'PT. IMC' => 'PT. IMC',
-                    'PT. SSI' => 'PT. SSI',
-                    'PT. CPM' => 'PT. CPM',
-                    'PT. Liwayway' => 'PT. Liwayway',
-                    'PT. Nippisun' => 'PT. Nippisun',
-                    'PT. Webus' => 'PT. Webus',
-                    'PT. Taeyong' => 'PT. Taeyong',
-                    'PT. AKM' => 'PT. AKM'                            
-                ]),
-
-                SelectFilter::make('status')                    
-                ->options([
-                    'Qualified' => 'Qualified',
-                    'Tes' => 'Tes',
-                    'Interview' => 'Interview',
-                    'MCU' => 'MCU',
-                    'Training' => 'Training',
-                    'Aktif' => 'Aktif',
-                    'Selesai' => 'Selesai',
-                    'Cut Off' => 'Cut Off',
-                    'Resign' => 'Resign'
-                ]),
+                            //    
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),                
                 Tables\Actions\EditAction::make(),                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ]),            
             ]);
+           
     }
 
     public static function getRelations(): array
@@ -344,4 +325,13 @@ class ApplicantResource extends Resource
             'edit' => Pages\EditApplicant::route('/{record}/edit'),
         ];
     }
+
+    // public static function infolist(Infolist $infolist): Infolist
+    // {
+    // return $infolist
+    //     ->schema([
+    //         TextEntry::make('appplicant_name')
+    //         ->label('Nama Pelamar')
+    //     ]);
+    // }
 }

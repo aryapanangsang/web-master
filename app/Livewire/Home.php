@@ -6,7 +6,9 @@ use Filament\Forms;
 use Livewire\Component;
 use Filament\Forms\Form;
 use App\Models\Applicant;
+use App\Mail\FormSubmitted;
 use Filament\Forms\Components\Card;
+use Illuminate\Support\Facades\Mail;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Contracts\HasForms;
@@ -224,11 +226,12 @@ class Home extends Component implements HasForms
     }
 
     public function save(): void
-    {
+    {      
         $data = $this->form->getState();                  
         Applicant::insert($data);
         // Alert::success('Frmulir Berhasil Disimpan', 'Silahkan ');
-
+        Mail::to($this->email)->send(new FormSubmitted($data));
         session()->flash('message', 'Formulir Berhasil Dikirim');
+        $this->redirectRoute('website');
     }
 }
